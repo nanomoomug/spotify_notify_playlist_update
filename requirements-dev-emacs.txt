@@ -1,0 +1,8 @@
+autopep8>=1.5
+flake8>=3.7.9
+importmagic>=0.1.7
+ipython>=7.13.0
+isort>=4.3.21
+pyflakes>=2.1.1
+rope>=0.16.0
+mypy>=0.770
