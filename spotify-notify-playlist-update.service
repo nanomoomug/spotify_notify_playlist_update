@@ -1,0 +1,10 @@
+[Unit]
+Description=Spotify playlist update checker
+
+[Service]
+WorkingDirectory=<The directory where the repository was cloned>
+ExecStart=<The python executable gotten from the output of install.sh> -m main --daemon
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
