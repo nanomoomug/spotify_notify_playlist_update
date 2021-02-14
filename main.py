@@ -13,6 +13,7 @@ from typing import Any, Iterable, List, Mapping, NewType, Optional, Tuple
 
 import daemon  # type: ignore
 import dominate  # type: ignore
+import requests
 import spotipy  # type: ignore
 from dominate.tags import (a, div, h2, h3, hr, img, span,  # type: ignore
                            table, td, tr)
@@ -289,8 +290,19 @@ def main(sleep_time: int) -> None:
     db = _initialize_db()
 
     while True:
-        _check_for_updates(db)
-        time.sleep(sleep_time)
+        try:
+            _check_for_updates(db)
+            time.sleep(sleep_time)
+        except requests.exceptions.ConnectionError:
+            logging.error(
+                ('Failed to connect. This might be because there is no '
+                 'internet. Retrying in one minute.'), exc_info=True)
+            time.sleep(60)
+        except Exception:
+            logging.error(
+                ('Exception while checking for update. Waiting 10 minutes and '
+                 'retrying.'), exc_info=True)
+            time.sleep(10*60)
 
 
 if __name__ == '__main__':
