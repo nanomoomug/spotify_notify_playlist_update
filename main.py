@@ -194,7 +194,7 @@ def _generate_html_email_body(
                 with tr():
                     with td():
                         with a(href=playlist['external_urls']['spotify']):
-                            img(src=playlist['images'][1]['url'],
+                            img(src=playlist['images'][0]['url'],
                                 width='200px', height='200px')
                     with td(style=('vertical-align: text-top; '
                                    'padding-left: 10px;')):
